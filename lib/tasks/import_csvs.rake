@@ -3,7 +3,6 @@ require 'csv'
 desc 'Import data from csv files'
 task :import => [:environment] do
 
-  system 'rake db:reset > /dev/nul'
   puts 'Clearing database...'
   Transaction.destroy_all
   InvoiceItem.destroy_all
@@ -13,32 +12,20 @@ task :import => [:environment] do
   Customer.destroy_all
 
   puts 'Importing customers...'
-  CSV.foreach('./db/data/customers.csv', headers: true, header_converters: :symbol, convert: :all) do |row|
-    Customer.create(row.to_h)
+  CSV.foreach('./db/data/customers.csv', headers: true, header_converters: :symbol) do |row|
+    Customer.create!(row.to_h)
   end
+  puts "#{Customer.count} Customers created"
 
-  puts 'Importing invoice items...'
-  CSV.foreach('./db/data/invoice_items.csv', headers: true, header_converters: :symbol, convert: :all) do |row|
-    InvoiceItem.create({
-      id: row[:id],
-      item_id: row[:item_id],
-      invoice_id: row[:invoice_id],
-      quantity: row[:quantity],
-      unit_price: row[:unit_price].to_f/100,
-      created_at: row[:created_at],
-      updated_at: row[:updated_at]
-      }
-    )
+  puts 'Importing merchants...'
+  CSV.foreach('./db/data/merchants.csv', headers: true, header_converters: :symbol) do |row|
+    Merchant.create!(row.to_h)
   end
-
-  puts 'Importing invoices...'
-  CSV.foreach('./db/data/invoices.csv', headers: true, header_converters: :symbol, convert: :all) do |row|
-    Invoice.create(row.to_h)
-  end
+  puts "#{Merchant.count} Merchants created"
 
   puts 'Importing items...'
-  CSV.foreach('./db/data/items.csv', headers: true, header_converters: :symbol, convert: :all) do |row|
-    Item.create({
+  CSV.foreach('./db/data/items.csv', headers: true, header_converters: :symbol) do |row|
+    Item.create!({
         id: row[:id],
         name: row[:name],
         description: row[:description],
@@ -49,20 +36,38 @@ task :import => [:environment] do
       }
     )
   end
+  puts "#{Item.count} Items created"
 
-  puts 'Importing merchants...'
-  CSV.foreach('./db/data/merchants.csv', headers: true, header_converters: :symbol, convert: :all) do |row|
-    Merchant.create(row.to_h)
+  puts 'Importing invoices...'
+  CSV.foreach('./db/data/invoices.csv', headers: true, header_converters: :symbol) do |row|
+    Invoice.create!(row.to_h)
   end
+  puts "#{Invoice.count} Invoices created"
+
+  puts 'Importing invoice items...'
+  CSV.foreach('./db/data/invoice_items.csv', headers: true, header_converters: :symbol) do |row|
+    InvoiceItem.create!({
+      id: row[:id],
+      item_id: row[:item_id],
+      invoice_id: row[:invoice_id],
+      quantity: row[:quantity],
+      unit_price: row[:unit_price].to_f/100,
+      created_at: row[:created_at],
+      updated_at: row[:updated_at]
+      }
+    )
+  end
+  puts "#{InvoiceItem.count} InvoiceItems created"
 
   puts 'Importing transactions...'
-  CSV.foreach('./db/data/transactions.csv', headers: true, header_converters: :symbol, convert: :all) do |row|
-    Transaction.create(row.to_h)
+  CSV.foreach('./db/data/transactions.csv', headers: true, header_converters: :symbol) do |row|
+    Transaction.create!(row.to_h)
   end
+  puts "#{Transaction.count} Transactions created"
 
-  ActiveRecord::Base.connection.tables.each do |t|
-    ActiveRecord::Base.connection.reset_pk_sequence!(t)
+  if Customer.count == 1000 && Merchant.count == 100 && Item.count == 2483 && Invoice.count == 4843 && InvoiceItem == 21687 && Transaction.count == 5595
+    puts "CSV successfully imported into database"
+  else
+    puts "CSV was not successfully imported into database"
   end
-
-  puts "CSV successfully imported into database"
 end
