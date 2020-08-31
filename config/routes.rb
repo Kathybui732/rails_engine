@@ -5,4 +5,12 @@ Rails.application.routes.draw do
       resources :merchants, only: [:index, :show, :create, :update, :destroy]
     end
   end
+
+  # namespace :api do
+  #   namespace :v1 do
+  #     namespace :merchants do
+  #       get '/find', to: 'search#'
+  #     end
+  #   end
+  # end
 end
