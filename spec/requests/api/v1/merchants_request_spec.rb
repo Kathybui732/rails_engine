@@ -6,15 +6,15 @@ RSpec.describe 'Merchant API' do
 
     get '/api/v1/merchants'
 
+    merchants_json = JSON.parse(response.body, symbolize_names: true)
+
     expect(response).to be_successful
-
-    merchants = JSON.parse(response.body, symbolize_names: true)
-
-    expect(merchants[:data].size).to eq(3)
-    expect(merchants[:data][0]).to have_key(:id)
-    expect(merchants[:data][0]).to have_key(:type)
-    expect(merchants[:data][0]).to have_key(:attributes)
-    expect(merchants[:data][0][:attributes]).to have_key(:name)
+    expect(merchants_json.class).to eq(Hash)
+    expect(merchants_json[:data].size).to eq(3)
+    expect(merchants_json[:data][0]).to have_key(:id)
+    expect(merchants_json[:data][0]).to have_key(:type)
+    expect(merchants_json[:data][0]).to have_key(:attributes)
+    expect(merchants_json[:data][0][:attributes]).to have_key(:name)
   end
 
   it "can find a merchant" do
@@ -26,6 +26,7 @@ RSpec.describe 'Merchant API' do
     merchant = Merchant.find(id)
 
     expect(response).to be_successful
+    expect(merchant_json.class).to eq(Hash)
     expect(merchant_json[:data][:id]).to eq("#{id}")
     expect(merchant_json[:data][:type]).to eq('merchant')
     expect(merchant_json[:data][:attributes][:name]).to eq(merchant.name)
@@ -40,6 +41,7 @@ RSpec.describe 'Merchant API' do
     merchant_json = JSON.parse(response.body, symbolize_names: true)
 
     expect(response).to be_successful
+    expect(merchant_json.class).to eq(Hash)
     expect(merchant.name).to eq(merchant_params[:name])
     expect(merchant_json[:data][:id]).to eq("#{merchant.id}")
     expect(merchant_json[:data][:type]).to eq('merchant')
@@ -56,6 +58,7 @@ RSpec.describe 'Merchant API' do
     merchant_json = JSON.parse(response.body, symbolize_names: true)
 
     expect(response).to be_successful
+    expect(merchant_json.class).to eq(Hash)
     expect(merchant.name).to_not eq(previous_name)
     expect(merchant.name).to eq(merchant_params[:name])
     expect(merchant_json[:data][:id]).to eq("#{merchant.id}")
@@ -71,6 +74,7 @@ RSpec.describe 'Merchant API' do
     merchant_json = JSON.parse(response.body, symbolize_names: true)
 
     expect(response).to be_successful
+    expect(merchant_json.class).to eq(Hash)
     expect(merchant_json[:data][:id]).to eq("#{merchant.id}")
     expect(merchant_json[:data][:type]).to eq('merchant')
     expect(merchant_json[:data][:attributes][:name]).to eq(merchant.name)
