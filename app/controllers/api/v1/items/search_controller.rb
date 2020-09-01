@@ -14,6 +14,7 @@ class Api::V1::Items::SearchController < ApplicationController
     results = results.filter_by_unit_price(params[:unit_price]) if params[:unit_price].present?
     results = results.filter_by_merchant_id(params[:merchant_id]) if params[:merchant_id].present?
     results = results.filter_by_created_at(params[:created_at]) if params[:created_at].present?
+    results = results.filter_by_updated_at(params[:updated_at]) if params[:updated_at].present?
     results
   end
 end
