@@ -15,6 +15,7 @@ RSpec.describe 'Items API' do
     expect(items_json[:data][0][:attributes]).to have_key(:name)
     expect(items_json[:data][0][:attributes]).to have_key(:description)
     expect(items_json[:data][0][:attributes]).to have_key(:unit_price)
+    expect(items_json[:data][0][:attributes]).to have_key(:merchant_id)
   end
 
   it "can get item by its id" do
@@ -31,15 +32,17 @@ RSpec.describe 'Items API' do
     expect(item_json[:data][:attributes][:name]).to eq(item.name)
     expect(item_json[:data][:attributes][:description]).to eq(item.description)
     expect(item_json[:data][:attributes][:unit_price]).to eq(item.unit_price)
+    expect(item_json[:data][:attributes][:merchant_id]).to eq(item.merchant_id)
   end
 
   it "can create a new item" do
     merchant_id = create(:merchant).id
     item_params = { name: "Saw", description: "I want to play a game", unit_price: 87.43, merchant_id: merchant_id }
 
-    post '/api/v1/items', params: {item: item_params}
-    item = Item.last
+    post '/api/v1/items', params: item_params
+
     item_json = JSON.parse(response.body, symbolize_names: true)
+    item = Item.last
 
     expect(response).to be_successful
     expect(item_json.class).to eq(Hash)
@@ -49,6 +52,7 @@ RSpec.describe 'Items API' do
     expect(item_json[:data][:attributes][:name]).to eq(item_params[:name])
     expect(item_json[:data][:attributes][:description]).to eq(item_params[:description])
     expect(item_json[:data][:attributes][:unit_price]).to eq(item_params[:unit_price])
+    expect(item_json[:data][:attributes][:merchant_id]).to eq(item.merchant_id)
   end
 
   it "can update an exisiting item" do
@@ -56,7 +60,7 @@ RSpec.describe 'Items API' do
     previous_name = Item.last.name
     item_params = { name: "Sledge" }
 
-    patch "/api/v1/items/#{id}", params: { item: item_params }
+    patch "/api/v1/items/#{id}", params: item_params
     item = Item.find(id)
     item_json = JSON.parse(response.body, symbolize_names: true)
 
@@ -69,6 +73,7 @@ RSpec.describe 'Items API' do
     expect(item_json[:data][:attributes][:name]).to eq(item_params[:name])
     expect(item_json[:data][:attributes][:description]).to eq(item.description)
     expect(item_json[:data][:attributes][:unit_price]).to eq(item.unit_price)
+    expect(item_json[:data][:attributes][:merchant_id]).to eq(item.merchant_id)
   end
 
   it "can destroy an item" do
@@ -85,6 +90,7 @@ RSpec.describe 'Items API' do
     expect(item_json[:data][:attributes][:name]).to eq(item.name)
     expect(item_json[:data][:attributes][:description]).to eq(item.description)
     expect(item_json[:data][:attributes][:unit_price]).to eq(item.unit_price)
+    expect(item_json[:data][:attributes][:merchant_id]).to eq(item.merchant_id)
     expect(Item.count).to eq(0)
     expect{Item.find(item.id)}.to raise_error(ActiveRecord::RecordNotFound)
   end

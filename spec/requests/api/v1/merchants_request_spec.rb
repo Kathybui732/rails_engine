@@ -37,7 +37,7 @@ RSpec.describe 'Merchant API' do
   it "can create a merchant" do
     merchant_params = { name: "New Merchant" }
 
-    post '/api/v1/merchants', params: { merchant: merchant_params }
+    post '/api/v1/merchants', params: merchant_params
 
     merchant = Merchant.last
     merchant_json = JSON.parse(response.body, symbolize_names: true)
@@ -56,7 +56,7 @@ RSpec.describe 'Merchant API' do
     previous_name = Merchant.last.name
     merchant_params = { name: 'Updated Name' }
 
-    patch "/api/v1/merchants/#{id}", params: { merchant: merchant_params }
+    patch "/api/v1/merchants/#{id}", params: merchant_params
 
     merchant = Merchant.find(id)
     merchant_json = JSON.parse(response.body, symbolize_names: true)

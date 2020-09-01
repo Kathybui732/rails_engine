@@ -10,4 +10,15 @@ RSpec.describe Merchant, type: :model do
     it { should have_many :invoices }
     it { should have_many(:transactions).through(:invoices) }
   end
+
+  describe 'methods' do
+    it "#find_merchant" do
+      merchant = create(:merchant)
+      params_hash = {
+        key: 'name',
+        value: merchant.name
+      }
+      expect(Merchant.find_merchant(params_hash)).to eq(merchant)
+    end
+  end
 end
