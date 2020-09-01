@@ -37,23 +37,24 @@ RSpec.describe 'Single find feature' do
     expect(item_json[:data][:attributes][:merchant_id]).to eq(item.merchant_id)
   end
 
-  # it 'can return a single result based on a description query param' do
-  #   item = create(:item)
-  #
-  #   get "/api/v1/items/find?description=#{item.description}"
-  #   item_json = JSON.parse(response.body, symbolize_names: true)
-  #
-  #   expect(response).to be_successful
-  #   expect(response.content_type).to eq("application/json")
-  #   expect(item_json.class).to eq(Hash)
-  #   expect(item_json.size).to eq(1)
-  #   expect(item_json[:data][:id]).to eq("#{item.id}")
-  #   expect(item_json[:data][:type]).to eq('item')
-  #   expect(item_json[:data][:attributes][:name]).to eq(item.name)
-  #   expect(item_json[:data][:attributes][:unit_price]).to eq(item.unit_price)
-  #   expect(item_json[:data][:attributes][:description]).to eq(item.description)
-  #   expect(item_json[:data][:attributes][:merchant_id]).to eq(item.merchant_id)
-  # end
+  it 'can return a single result based on a description query param' do
+    id = create(:merchant).id
+    item = Item.create(name: "Puck", unit_price: 90, description: "For Hockey", merchant_id: id)
+
+    get "/api/v1/items/find?description=#{item.description}"
+    item_json = JSON.parse(response.body, symbolize_names: true)
+
+    expect(response).to be_successful
+    expect(response.content_type).to eq("application/json")
+    expect(item_json.class).to eq(Hash)
+    expect(item_json.size).to eq(1)
+    expect(item_json[:data][:id]).to eq("#{item.id}")
+    expect(item_json[:data][:type]).to eq('item')
+    expect(item_json[:data][:attributes][:name]).to eq(item.name)
+    expect(item_json[:data][:attributes][:unit_price]).to eq(item.unit_price)
+    expect(item_json[:data][:attributes][:description]).to eq(item.description)
+    expect(item_json[:data][:attributes][:merchant_id]).to eq(item.merchant_id)
+  end
 
   it 'can return a single result based on a unit_price query param' do
     item = create(:item)
@@ -123,6 +124,26 @@ RSpec.describe 'Single find feature' do
     expect(item_json.class).to eq(Hash)
     expect(item_json.size).to eq(1)
 
+    expect(item_json[:data][:id]).to eq("#{item.id}")
+    expect(item_json[:data][:type]).to eq('item')
+    expect(item_json[:data][:attributes][:name]).to eq(item.name)
+    expect(item_json[:data][:attributes][:unit_price]).to eq(item.unit_price)
+    expect(item_json[:data][:attributes][:description]).to eq(item.description)
+    expect(item_json[:data][:attributes][:merchant_id]).to eq(item.merchant_id)
+  end
+
+  it 'can return a single result based on a fragment, case-insensitive name query param' do
+    id = create(:merchant).id
+    item = Item.create(name: "Puck", unit_price: 90, description: "For Hockey", merchant_id: id)
+    name = 'PU'
+
+    get "/api/v1/items/find?name=#{name}"
+    item_json = JSON.parse(response.body, symbolize_names: true)
+
+    expect(response).to be_successful
+    expect(response.content_type).to eq("application/json")
+    expect(item_json.class).to eq(Hash)
+    expect(item_json.size).to eq(1)
     expect(item_json[:data][:id]).to eq("#{item.id}")
     expect(item_json[:data][:type]).to eq('item')
     expect(item_json[:data][:attributes][:name]).to eq(item.name)
