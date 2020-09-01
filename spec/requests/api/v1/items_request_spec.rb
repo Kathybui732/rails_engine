@@ -15,7 +15,6 @@ RSpec.describe 'Items API' do
     expect(items_json[:data][0][:attributes]).to have_key(:name)
     expect(items_json[:data][0][:attributes]).to have_key(:description)
     expect(items_json[:data][0][:attributes]).to have_key(:unit_price)
-    expect(items_json[:data][0][:relationships]).to have_key(:merchant)
   end
 
   it "can get item by its id" do
@@ -32,7 +31,6 @@ RSpec.describe 'Items API' do
     expect(item_json[:data][:attributes][:name]).to eq(item.name)
     expect(item_json[:data][:attributes][:description]).to eq(item.description)
     expect(item_json[:data][:attributes][:unit_price]).to eq(item.unit_price)
-    expect(item_json[:data][:relationships]).to have_key(:merchant)
   end
 
   it "can create a new item" do
@@ -51,7 +49,6 @@ RSpec.describe 'Items API' do
     expect(item_json[:data][:attributes][:name]).to eq(item_params[:name])
     expect(item_json[:data][:attributes][:description]).to eq(item_params[:description])
     expect(item_json[:data][:attributes][:unit_price]).to eq(item_params[:unit_price])
-    expect(item_json[:data][:relationships]).to have_key(:merchant)
   end
 
   it "can update an exisiting item" do
@@ -72,7 +69,6 @@ RSpec.describe 'Items API' do
     expect(item_json[:data][:attributes][:name]).to eq(item_params[:name])
     expect(item_json[:data][:attributes][:description]).to eq(item.description)
     expect(item_json[:data][:attributes][:unit_price]).to eq(item.unit_price)
-    expect(item_json[:data][:relationships]).to have_key(:merchant)
   end
 
   it "can destroy an item" do
@@ -89,7 +85,6 @@ RSpec.describe 'Items API' do
     expect(item_json[:data][:attributes][:name]).to eq(item.name)
     expect(item_json[:data][:attributes][:description]).to eq(item.description)
     expect(item_json[:data][:attributes][:unit_price]).to eq(item.unit_price)
-    expect(item_json[:data][:relationships]).to have_key(:merchant)
     expect(Item.count).to eq(0)
     expect{Item.find(item.id)}.to raise_error(ActiveRecord::RecordNotFound)
   end

@@ -9,6 +9,7 @@ RSpec.describe 'Merchant API' do
     merchants_json = JSON.parse(response.body, symbolize_names: true)
 
     expect(response).to be_successful
+    expect(response.content_type).to eq("application/json")
     expect(merchants_json.class).to eq(Hash)
     expect(merchants_json[:data].size).to eq(3)
     expect(merchants_json[:data][0]).to have_key(:id)
@@ -26,22 +27,24 @@ RSpec.describe 'Merchant API' do
     merchant = Merchant.find(id)
 
     expect(response).to be_successful
+    expect(response.content_type).to eq("application/json")
     expect(merchant_json.class).to eq(Hash)
     expect(merchant_json[:data][:id]).to eq("#{id}")
     expect(merchant_json[:data][:type]).to eq('merchant')
     expect(merchant_json[:data][:attributes][:name]).to eq(merchant.name)
-
   end
 
   it "can create a merchant" do
     merchant_params = { name: "New Merchant" }
 
     post '/api/v1/merchants', params: { merchant: merchant_params }
+
     merchant = Merchant.last
     merchant_json = JSON.parse(response.body, symbolize_names: true)
 
     expect(response).to be_successful
     expect(merchant_json.class).to eq(Hash)
+    expect(response.content_type).to eq("application/json")
     expect(merchant.name).to eq(merchant_params[:name])
     expect(merchant_json[:data][:id]).to eq("#{merchant.id}")
     expect(merchant_json[:data][:type]).to eq('merchant')
@@ -54,10 +57,12 @@ RSpec.describe 'Merchant API' do
     merchant_params = { name: 'Updated Name' }
 
     patch "/api/v1/merchants/#{id}", params: { merchant: merchant_params }
+
     merchant = Merchant.find(id)
     merchant_json = JSON.parse(response.body, symbolize_names: true)
 
     expect(response).to be_successful
+    expect(response.content_type).to eq("application/json")
     expect(merchant_json.class).to eq(Hash)
     expect(merchant.name).to_not eq(previous_name)
     expect(merchant.name).to eq(merchant_params[:name])
@@ -75,6 +80,7 @@ RSpec.describe 'Merchant API' do
 
     expect(response).to be_successful
     expect(merchant_json.class).to eq(Hash)
+    expect(response.content_type).to eq("application/json")
     expect(merchant_json[:data][:id]).to eq("#{merchant.id}")
     expect(merchant_json[:data][:type]).to eq('merchant')
     expect(merchant_json[:data][:attributes][:name]).to eq(merchant.name)
