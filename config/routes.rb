@@ -4,9 +4,13 @@ Rails.application.routes.draw do
       namespace :merchants do
         get '/find', to: 'search#show'
       end
+
+      namespace :items do
+        get '/find', to: 'search#show'
+      end
     end
   end
-  
+
   namespace :api do
     namespace :v1 do
       resources :items, only: [:index, :show, :create, :update, :destroy] do
