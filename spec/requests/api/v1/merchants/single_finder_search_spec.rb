@@ -17,6 +17,22 @@ RSpec.describe 'Single find feature' do
     expect(merchant_json[:data][:attributes][:name]).to eq(merchant.name)
   end
 
+  it 'can return a single result based on a id query param' do
+    merchant = create(:merchant)
+
+    get "/api/v1/merchants/find?id=#{merchant.id}"
+    merchant_json = JSON.parse(response.body, symbolize_names: true)
+
+    expect(response).to be_successful
+    expect(response.content_type).to eq("application/json")
+    expect(merchant_json.class).to eq(Hash)
+    expect(merchant_json.size).to eq(1)
+
+    expect(merchant_json[:data][:id]).to eq("#{merchant.id}")
+    expect(merchant_json[:data][:type]).to eq('merchant')
+    expect(merchant_json[:data][:attributes][:name]).to eq(merchant.name)
+  end
+
   it 'can return a single result based on a name query param even if there are two of that same param' do
     merchant = Merchant.create(name: "King Soopers")
     merchant_2 = Merchant.create(name: "King Soopers")
