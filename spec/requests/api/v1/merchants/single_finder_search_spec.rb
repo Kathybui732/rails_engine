@@ -12,9 +12,9 @@ RSpec.describe 'Single find feature' do
     expect(merchant_json.class).to eq(Hash)
     expect(merchant_json.size).to eq(1)
 
-    expect(merchant_json[:data][0][:id]).to eq("#{merchant.id}")
-    expect(merchant_json[:data][0][:type]).to eq('merchant')
-    expect(merchant_json[:data][0][:attributes][:name]).to eq(merchant.name)
+    expect(merchant_json[:data][:id]).to eq("#{merchant.id}")
+    expect(merchant_json[:data][:type]).to eq('merchant')
+    expect(merchant_json[:data][:attributes][:name]).to eq(merchant.name)
   end
 
   it 'can return a single result based on a name query param even if there are two of that same param' do
@@ -29,10 +29,10 @@ RSpec.describe 'Single find feature' do
     expect(response.content_type).to eq("application/json")
     expect(merchant_json.class).to eq(Hash)
     expect(merchant_json.size).to eq(1)
-    expect(merchant_json[:data][0][:id]).to eq("#{merchant.id}")
-    expect(merchant_json[:data][0][:id]).to_not eq("#{merchant_2.id}")
-    expect(merchant_json[:data][0][:type]).to eq('merchant')
-    expect(merchant_json[:data][0][:attributes][:name]).to eq(merchant.name)
+    expect(merchant_json[:data][:id]).to eq("#{merchant.id}")
+    expect(merchant_json[:data][:id]).to_not eq("#{merchant_2.id}")
+    expect(merchant_json[:data][:type]).to eq('merchant')
+    expect(merchant_json[:data][:attributes][:name]).to eq(merchant.name)
   end
 
   it 'can return a single result based on a created at query param' do
@@ -46,9 +46,9 @@ RSpec.describe 'Single find feature' do
     expect(response.content_type).to eq("application/json")
     expect(merchant_json.class).to eq(Hash)
     expect(merchant_json.size).to eq(1)
-    expect(merchant_json[:data][0][:id]).to eq("#{merchant.id}")
-    expect(merchant_json[:data][0][:type]).to eq('merchant')
-    expect(merchant_json[:data][0][:attributes][:name]).to eq(merchant.name)
+    expect(merchant_json[:data][:id]).to eq("#{merchant.id}")
+    expect(merchant_json[:data][:type]).to eq('merchant')
+    expect(merchant_json[:data][:attributes][:name]).to eq(merchant.name)
   end
 
   it 'can return a single result based on a updated at query param' do
@@ -61,9 +61,9 @@ RSpec.describe 'Single find feature' do
     expect(response.content_type).to eq("application/json")
     expect(merchant_json.class).to eq(Hash)
     expect(merchant_json.size).to eq(1)
-    expect(merchant_json[:data][0][:id]).to eq("#{merchant.id}")
-    expect(merchant_json[:data][0][:type]).to eq('merchant')
-    expect(merchant_json[:data][0][:attributes][:name]).to eq(merchant.name)
+    expect(merchant_json[:data][:id]).to eq("#{merchant.id}")
+    expect(merchant_json[:data][:type]).to eq('merchant')
+    expect(merchant_json[:data][:attributes][:name]).to eq(merchant.name)
   end
 
   it 'can return a single result based on a name that is a fragment and lower case' do
@@ -77,8 +77,8 @@ RSpec.describe 'Single find feature' do
     expect(response.content_type).to eq("application/json")
     expect(merchant_json.class).to eq(Hash)
     expect(merchant_json.size).to eq(1)
-    expect(merchant_json[:data][0][:id]).to eq("#{merchant.id}")
-    expect(merchant_json[:data][0][:type]).to eq('merchant')
-    expect(merchant_json[:data][0][:attributes][:name]).to eq(merchant.name)
+    expect(merchant_json[:data][:id]).to eq("#{merchant.id}")
+    expect(merchant_json[:data][:type]).to eq('merchant')
+    expect(merchant_json[:data][:attributes][:name]).to eq(merchant.name)
   end
 end
