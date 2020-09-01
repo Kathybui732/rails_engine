@@ -65,9 +65,9 @@ task :import => [:environment] do
   end
   puts "#{Transaction.count} Transactions created"
 
-  if Customer.count == 1000 && Merchant.count == 100 && Item.count == 2483 && Invoice.count == 4843 && InvoiceItem == 21687 && Transaction.count == 5595
-    puts "CSV successfully imported into database"
-  else
-    puts "CSV was not successfully imported into database"
+  ActiveRecord::Base.connection.tables.each do |t|
+    ActiveRecord::Base.connection.reset_pk_sequence!(t)
   end
+
+  puts "CSV successfully imported into database"
 end
