@@ -1,7 +1,12 @@
 class Api::V1::Merchants::SearchController < ApplicationController
   def show
     results = search_results(params).first
-    render json: MerchantSerializer.new(results).serialized_json
+    render json: MerchantSerializer.new(results)
+  end
+
+  def index
+    results = search_results(params)
+    render json: MerchantSerializer.new(results)
   end
 
   private
