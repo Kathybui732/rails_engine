@@ -3,9 +3,7 @@ require 'rails_helper'
 RSpec.describe 'Multi merchants finder feature' do
   describe 'As a user' do
     it "can provide a list of merchants based on a name query" do
-      merchants = 5.times do
-        Merchant.create(name: "King Soopers")
-      end
+      create_list(:merchant, 5, name: "King Soopers")
       create(:merchant)
       name = "King Soopers"
 
@@ -20,9 +18,7 @@ RSpec.describe 'Multi merchants finder feature' do
     end
 
     it "can provide a list of merchants based on a part of the name query" do
-      merchants = 5.times do
-        Merchant.create(name: "King Soopers")
-      end
+      create_list(:merchant, 5, name: "King Soopers")
       create(:merchant)
       name = "KIN"
 
