@@ -1,9 +1,12 @@
 class Item < ApplicationRecord
+  include Filterable
+
   validates :name, :description, :unit_price, presence: true
 
   belongs_to :merchant
   has_many :invoice_items, dependent: :destroy
   has_many :invoices, through: :invoice_items
+  has_many :transactions, through: :invoices
 
   scope :filter_by_name, ->(name) { where('lower(name) like ?', "%#{name.downcase}%") }
   scope :filter_by_description, ->(description) { where('lower(description) like ?', "%#{description.downcase}%") }
