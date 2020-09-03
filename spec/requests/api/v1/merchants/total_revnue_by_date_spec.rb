@@ -45,7 +45,7 @@ RSpec.describe 'Total revenue across all merchants onver a time period' do
   end
 
   it "it can get total revenue endpoint" do
-    get '/api/v1/revenue?start=2012-03-25&end=2012-03-27'
+    get '/api/v1/revenue', params: { start: '2012-03-25', end: '2012-03-27'}
 
     total_revenue_json = JSON.parse(response.body, symbolize_names: true)
 
