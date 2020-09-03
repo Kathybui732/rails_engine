@@ -1,13 +1,14 @@
 # README
 
 # Rails Engine
-Rails engine is a backend E-commerce provides full CRUD functionality API endpoints for Customers, Merchants following the ReST principles. This application also provides the following additional endpoints:
-  - '/find' search capabilities to return a single item/merchant finder under one param query int he endpoint
-  - '/find_all' also a search feature, however it returns a list of merchant/items
-  - 'merchants/most_revenue' that takes in a quantity param that will return an endpoint with the top x number of merchants with the most revenue
-  - '/merchants/most_items' also takes in a wuantity param, but will return the top x merchants who have sold the most items
-  - '/revenue' which takes in two date params and will return an endpoint with the total revenue across all merchants during that time period
-  - '/merchants/:id/revenue' returns an endpoint with the revenue of a single merchant
+Rails engine is a backend E-commerce provides full CRUD functionality API endpoints for Customers, Merchants following the ReST principles. This application provides a total of 28 endpoints including:
+  - 20 ReST endpoints for merchants and items as well as their relational endpoints
+  - 2 endpoints for the '/find' search capabilities to return a single item/merchant finder under one param query
+  - 2 endpoints for the '/find_all' also a search feature that will it returns a list of merchant/items
+  - 1 endpoints for the 'merchants/most_revenue' that takes in a quantity param that will return an endpoint with the top x number of merchants with the most revenue
+  - 1 endpoints for the '/merchants/most_items' which also takes in a quantity param, but will return the top x merchants who have sold the most items
+  - 1 endpoints for the '/revenue' which takes in two date params and will return an endpoint with the total revenue across all merchants during that time period
+  - 1 endpoints for the '/merchants/:id/revenue' returns an endpoint with the revenue of a single merchant
   Endpoints were constructed using Active record. 
   
  ### Ruby Version
