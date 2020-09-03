@@ -1,15 +1,15 @@
 class Api::V1::Items::SearchController < ApplicationController
   def show
-    render json: ItemSerializer.new(search_results(params).first)
+    render json: ItemSerializer.new(search(params).first)
   end
 
   def index
-    render json: ItemSerializer.new(search_results(params))
+    render json: ItemSerializer.new(search(params))
   end
 
   private
 
-  def search_results(params)
+  def search(params)
     Item.filter(params.slice(:name, :id, :description, :unit_price, :merchant_id, :created_at, :updated_at))
   end
 end
