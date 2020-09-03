@@ -76,15 +76,8 @@ RSpec.describe 'Merchant API' do
 
     expect(Merchant.count).to eq(1)
     expect{ delete "/api/v1/merchants/#{merchant.id}" }.to change(Merchant, :count).by(-1)
-    merchant_json = JSON.parse(response.body, symbolize_names: true)
 
-    expect(response).to be_successful
-    expect(merchant_json.class).to eq(Hash)
-    expect(response.content_type).to eq("application/json")
-    expect(merchant_json[:data][:id]).to eq("#{merchant.id}")
-    expect(merchant_json[:data][:type]).to eq('merchant')
-    expect(merchant_json[:data][:attributes][:name]).to eq(merchant.name)
-    expect(Merchant.count).to eq(0)
+    expect(response.status).to eq(204)
     expect{Merchant.find(merchant.id)}.to raise_error(ActiveRecord::RecordNotFound)
   end
 end
