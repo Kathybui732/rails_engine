@@ -58,3 +58,11 @@ Merchant Revenue
 
 
 Total Revenue over a time period
+
+### Sad paths/Edge cases considered, not exucuted
+- Response needs: 
+- to be accounted for when users enter something other than a number for an id when making a get request
+- Get requests for a merchant's show page that does not exist should return 204/404 status response
+- The search queries using dates have to be entered in exactly a format such as this: '2012-03-27 14:53:59 UTC' - could tweak filter method to allow for other date syntaxes to work
+- Destroy methods destroy the record of the merchant or item, direct dependencies are accounted for, but secondary connections are not accounted for. Some records might be left with empty merchant or item ID numbers.
+- Sometimes the queries return with no results, this usually just returns an empty JSON - equivilent to 204?
