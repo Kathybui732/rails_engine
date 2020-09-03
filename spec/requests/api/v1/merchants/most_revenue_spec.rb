@@ -69,4 +69,16 @@ RSpec.describe 'Most revenue of a variable number of merchants' do
     expect(most_rev_json[:data][0][:attributes][:name]).to_not eq(@m6.name)
     expect(most_rev_json[:data][0][:attributes][:name]).to_not eq(@m7.name)
   end
+
+  it "will render 204 if quantity is not a number, but a symbol" do
+    get "/api/v1/merchants/most_revenue", params: { :quantity => '!' }
+
+    expect(response.status).to eq(204)
+  end
+
+  it "will render 204 if quantity is not a number, but a letter" do
+    get "/api/v1/merchants/most_revenue", params: { :quantity => 'A' }
+
+    expect(response.status).to eq(204)
+  end
 end
