@@ -20,13 +20,13 @@ RSpec.describe 'Most revenue of a variable number of merchants' do
     @in6 = create(:invoice, merchant_id: @m6.id, status: 'packaged')
     @in7 = create(:invoice, merchant_id: @m7.id, status: 'shipped')
 
-    @ii1 = create(:invoice_item, invoice_id: @in1.id, item_id: @it1.id, quantity: 1, unit_price: 10 ) # rev: 10, items: 1
-    @ii2 = create(:invoice_item, invoice_id: @in2.id, item_id: @it2.id, quantity: 2, unit_price: 20 ) # rev: 40, items: 2
-    @ii3 = create(:invoice_item, invoice_id: @in3.id, item_id: @it3.id, quantity: 3, unit_price: 30 ) # rev: 90, items: 3
-    @ii4 = create(:invoice_item, invoice_id: @in4.id, item_id: @it4.id, quantity: 4, unit_price: 40 ) # rev: 160, items: 4
-    @ii5 = create(:invoice_item, invoice_id: @in5.id, item_id: @it5.id, quantity: 5, unit_price: 50 ) # rev: 250, items: 5
-    @ii6 = create(:invoice_item, invoice_id: @in6.id, item_id: @it6.id, quantity: 6, unit_price: 60 ) # rev: 360, items: 6
-    @ii7 = create(:invoice_item, invoice_id: @in7.id, item_id: @it7.id, quantity: 7, unit_price: 70 ) # rev: 490, items: 7
+    @ii1 = create(:invoice_item, invoice_id: @in1.id, item_id: @it1.id, quantity: 1, unit_price: 10 )
+    @ii2 = create(:invoice_item, invoice_id: @in2.id, item_id: @it2.id, quantity: 2, unit_price: 20 )
+    @ii3 = create(:invoice_item, invoice_id: @in3.id, item_id: @it3.id, quantity: 3, unit_price: 30 )
+    @ii4 = create(:invoice_item, invoice_id: @in4.id, item_id: @it4.id, quantity: 4, unit_price: 40 )
+    @ii5 = create(:invoice_item, invoice_id: @in5.id, item_id: @it5.id, quantity: 5, unit_price: 50 )
+    @ii6 = create(:invoice_item, invoice_id: @in6.id, item_id: @it6.id, quantity: 6, unit_price: 60 )
+    @ii7 = create(:invoice_item, invoice_id: @in7.id, item_id: @it7.id, quantity: 7, unit_price: 70 )
 
     @t1 = create(:transaction, invoice_id: @in1.id, result: 'success', created_at: '2012-03-25 14:53:59 UTC' )
     @t2 = create(:transaction, invoice_id: @in2.id, result: 'success', created_at: '2012-03-26 14:53:59 UTC' )

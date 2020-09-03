@@ -6,6 +6,10 @@ class Merchant < ApplicationRecord
   has_many :invoices, dependent: :destroy
   has_many :transactions, through: :invoices
 
+  def revenue
+    Invoice.joins(:transactions).where("transactions.result = 'success' and invoices.status = 'shipped'").joins(:invoice_items).sum('invoice_items.quantity * invoice_items.unit_price')
+  end
+  
   scope :filter_by_name, ->(name) { where('lower(name) like ?', "%#{name.downcase}%") }
   scope :filter_by_id, ->(id) { where id: id }
   scope :filter_by_created_at, ->(created_at) { where('Date(created_at) = ?', created_at.to_s) }

@@ -1,6 +1,6 @@
 class RevenueSerializer
   include FastJsonapi::ObjectSerializer
-  attributes: revenue
+  attributes :revenue
 
   set_id 'nil?'
 end
