@@ -1,7 +1,7 @@
 # README
 
 # Rails Engine
-Rails engine is a backend E-commerce provides full CRUD functionality API endpoints for Customers, Merchants following the ReST principles. This application provides a total of 28 endpoints including:
+Rails engine is a backend E-commerce application providing full CRUD functionality API endpoints for Customers, Merchants following the ReST principles. This application provides a total of 28 endpoints including:
   - 20 ReST endpoints for merchants and items as well as their relational endpoints
   - 2 endpoints for the '/find' search capabilities to return a single item/merchant finder under one param query
   - 2 endpoints for the '/find_all' also a search feature that will it returns a list of merchant/items
