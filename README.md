@@ -8,12 +8,12 @@ Rails engine is a backend E-commerce provides full CRUD functionality API endpoi
   - '/merchants/most_items' also takes in a wuantity param, but will return the top x merchants who have sold the most items
   - '/revenue' which takes in two date params and will return an endpoint with the total revenue across all merchants during that time period
   - '/merchants/:id/revenue' returns an endpoint with the revenue of a single merchant
-  Endpoints were constructed using Active record. 
-  
+  Endpoints were constructed using Active record.
+
  ### Ruby Version
  Ruby 2.5.3
  Rails 5.2.4.3
- 
+
  ### Configuration
 1. `git clone git@github.com:Kathybui732/rails_engine.git`
 2. `cd rails_engine`
@@ -59,9 +59,10 @@ Merchant Revenue
 
 Total Revenue over a time period
 
-### Sad paths/Edge cases considered, not exucuted
-- Response needs: 
+### Sad paths/Edge cases considered, not executed
+- Response needs:
 - to be accounted for when users enter something other than a number for an id when making a get request
+- Users entering in multiple params
 - Get requests for a merchant's show page that does not exist should return 204/404 status response
 - The search queries using dates have to be entered in exactly a format such as this: '2012-03-27 14:53:59 UTC' - could tweak filter method to allow for other date syntaxes to work
 - Destroy methods destroy the record of the merchant or item, direct dependencies are accounted for, but secondary connections are not accounted for. Some records might be left with empty merchant or item ID numbers.
