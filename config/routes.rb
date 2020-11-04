@@ -1,6 +1,7 @@
 Rails.application.routes.draw do
   namespace :api do
     namespace :v1 do
+      get '/', to: 'welcome#index'
       get '/revenue', to: 'revenue#index'
 
       namespace :merchants do
@@ -29,4 +30,6 @@ Rails.application.routes.draw do
       end
     end
   end
+
+  get '/', to: redirect('/api/v1/')
 end

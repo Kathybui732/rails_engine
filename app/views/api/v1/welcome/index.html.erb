@@ -1,0 +1,509 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <title>Rails Engine Documentation</title>
+  </head>
+  <body>
+    <section class="Welcome">
+      <h1>Welcome to Rails Engine!</h1>
+      <h3>Here is the documentation for all of our endpoints</h3>
+      <p>Rails Engine is a backend e-commerce application providing fully tested API endpoints. The endpoints consist of information about merchants and their items as well as business logic enpoints providing statistical data about the merchant information located in our database.</p>
+    </section>
+
+    <section class="Getting Started">
+      <h3>Getting Started</h3>
+      <p>The base URL for the application is <b>https://rails-engine-kb.herokuapp.com/api/v1</b></p>
+      <p>Here are the following endpoints available from this application:</p>
+      <ul>
+        <li><b><pre><a href="#get-merchants">GET</a>, <a href="#post-merchants">POST</a> /merchants</b></li>
+        <li><b><pre><a href="#get-merchants-id">GET</a>, <a href="#patch-merchants-id">PATCH</a>, <a href="#delete-merchants-id">DELETE</a> /merchants/:id</b></li>
+        <li><b><pre><a href="#get-items">GET</a>, <a href="#post-items">POST</a> /items</b></li>
+        <li><b><pre><a href="#get-items-id">GET</a>, <a href="#patch-items-id">PATCH</a>, <a href="#delete-items-id">DELETE</a> /items/:id</b></li>
+        <li><b><pre><a href="#get-merchants-items">GET</a> /merchants/:merchant_id/items</b></li>
+        <li><b><pre><a href="#get-merchants-revenue">GET</a> /merchants/:merchant_id/revenue</b></li>
+        <li><b><pre><a href="#get-revenue">GET</a> /revenue</b></li>
+        <li><b><pre><a href="#get-merchants-find">GET</a> /merchants/find</b></li>
+        <li><b><pre><a href="#get-merchants-find-all">GET</a> /merchants/find_all</b></li>
+        <li><b><pre><a href="#get-merchants-most-revenue">GET</a> /merchants/most_revenue</b></li>
+        <li><b><pre><a href="#get-merchants-most-items">GET</a> /merchants/most_items</b></li>
+        <li><b><pre><a href="#get-items-find">GET</a> /items/find</b></li>
+        <li><b><pre><a href="#get-items-find-all">GET</a> /items/find_all</b></li>
+        <li><b><pre><a href="#get-items-merchant">GET</a> /items/:item_id/merchant</b></li>
+      </ul>
+    </section>
+    <br>
+    <br>
+    <section>
+      <h3>Endpoint Examples</h3>
+        <section id="get-merchants" style="background-color:lightgrey;">
+          <p><b>GET /merchants</b></p>
+          <p style="color:blue;">Response</p>
+          <pre><code>
+            {
+              "data": [
+              {
+                "id": "1",
+                "type": "merchant",
+                "attributes": {
+                  "name": "Schroeder-Jerde"
+                }
+              },
+              {
+                "id": "2",
+                "type": "merchant",
+                "attributes": {
+                  "name": "Klein, Rempel and Jones"
+                }
+              }
+              ]
+            }
+          </code></pre>
+        </section>
+        <br>
+        <section id="post-merchants" style="background-color:lightgrey;">
+          <p><b>POST /merchants</b></p>
+          <p style="color:blue;">Body</p>
+          <pre><code>
+            {
+              "name": "New Merchant"
+            }
+          </code></pre>
+          <p style="color:blue;">Response</p>
+          <pre><code>
+            {
+              "data": {
+                "id": "101",
+                "type": "merchant",
+                "attributes": {
+                  "name": "New Merchant"
+                }
+              }
+            }
+          </code></pre>
+        </section>
+        <br>
+        <section id="get-merchants-id" style="background-color:lightgrey;">
+          <p><b>GET /merchants/1</b></p>
+          <p style="color:blue;">Response</p>
+          <pre><code>
+            {
+              "data": {
+                "id": "1",
+                "type": "merchant",
+                "attributes": {
+                  "name": "Schroeder-Jerde"
+                }
+              }
+            }
+          </code></pre>
+        </section>
+      <br>
+        <section id="patch-merchants-id" style="background-color:lightgrey;">
+          <p><b>PATCH /merchants/101</b></p>
+          <p style="color:blue;">Body</p>
+          <pre><code>
+            {
+              "name": "New Name"
+            }
+          </code></pre>
+          <p style="color:blue;">Response</p>
+          <pre><code>
+            {
+              "data": {
+                "id": "101",
+                "type": "merchant",
+                "attributes": {
+                  "name": "New Name"
+                }
+              }
+            }
+          </code></pre>
+        </section>
+      <br>
+      <section id="delete-merchants-id" style="background-color:lightgrey;">
+        <p><b>DELETE /merchants/101</b></p>
+        <p style="color:blue;">Response</p>
+        <pre><code>
+          204 status code: No content
+        </code></pre>
+      </section>
+      <br>
+      <section id="get-items" style="background-color:lightgrey;">
+        <p><b>GET /items</b></p>
+        <p style="color:blue;">Response</p>
+        <pre><code>
+          {
+              "data": [
+                  {
+                      "id": "1",
+                      "type": "item",
+                      "attributes": {
+                          "name": "Item Qui Esse",
+                          "description": "Nihil autem sit odio inventore deleniti. Est laudantium ratione distinctio laborum. Minus voluptatem nesciunt assumenda dicta voluptatum porro.",
+                          "unit_price": 751.07,
+                          "merchant_id": 1
+                      }
+                  },
+                  {
+                      "id": "2",
+                      "type": "item",
+                      "attributes": {
+                          "name": "Item Autem Minima",
+                          "description": "Cumque consequuntur ad. Fuga tenetur illo molestias enim aut iste. Provident quo hic aut. Aut quidem voluptates dolores. Dolorem quae ab alias tempora.",
+                          "unit_price": 670.76,
+                          "merchant_id": 1
+                      }
+                  }
+              ]
+          }
+        </code></pre>
+      </section>
+      <br>
+      <section id="post-items" style="background-color:lightgrey;">
+        <p><b>POST /items</b></p>
+        <p style="color:blue;">Body</p>
+        <pre><code>
+          {
+            "name": "New Item",
+            "description": "New item added to list",
+            "unit_price": "23.00",
+            "merchant_id": "1"
+          }
+        </code></pre>
+        <p style="color:blue;">Response</p>
+        <pre><code>
+          {
+              "data": {
+                  "id": "2484",
+                  "type": "item",
+                  "attributes": {
+                      "name": "New Item",
+                      "description": "New item added to list",
+                      "unit_price": 23.0,
+                      "merchant_id": 1
+                  }
+              }
+          }
+        </code></pre>
+      </section>
+      <br>
+      <section id="get-items-id" style="background-color:lightgrey;">
+        <p><b>GET /items/2484</b></p>
+        <p style="color:blue;">Response</p>
+        <pre><code>
+          {
+              "data": {
+                  "id": "2484",
+                  "type": "item",
+                  "attributes": {
+                      "name": "New Item",
+                      "description": "New item added to list",
+                      "unit_price": 23.0,
+                      "merchant_id": 1
+                  }
+              }
+          }
+        </code></pre>
+      </section>
+      <br>
+      <section id="patch-items-id" style="background-color:lightgrey;">
+        <p><b>PATCH /items/2484</b></p>
+        <p style="color:blue;">Body</p>
+        <pre><code>
+          {
+            "name": "Update Item",
+            "description": "Update item description",
+            "unit_price": "25.00",
+            "merchant_id": "1"
+          }
+        </code></pre>
+        <p style="color:blue;">Response</p>
+        <pre><code>
+          {
+              "data": {
+                  "id": "2484",
+                  "type": "item",
+                  "attributes": {
+                      "name": "Update Item",
+                      "description": "Update item description",
+                      "unit_price": 25.0,
+                      "merchant_id": 1
+                  }
+              }
+          }
+        </code></pre>
+      </section>
+      <br>
+      <section id="delete-items-id" style="background-color:lightgrey;">
+        <p><b>DELETE /items/2484</b></p>
+        <p style="color:blue;">Response</p>
+        <pre><code>
+          204 status code: No content
+        </code></pre>
+      </section>
+      <br>
+      <section id="get-merchants-items" style="background-color:lightgrey;">
+        <p><b>GET /merchant/1/items</b></p>
+        <p style="color:blue;">Response</p>
+        <pre><code>
+          {
+              "data": [
+                  {
+                      "id": "1",
+                      "type": "item",
+                      "attributes": {
+                          "name": "Item Qui Esse",
+                          "description": "Nihil autem sit odio inventore deleniti. Est laudantium ratione distinctio laborum. Minus voluptatem nesciunt assumenda dicta voluptatum porro.",
+                          "unit_price": 751.07,
+                          "merchant_id": 1
+                      }
+                  },
+                  {
+                      "id": "2",
+                      "type": "item",
+                      "attributes": {
+                          "name": "Item Autem Minima",
+                          "description": "Cumque consequuntur ad. Fuga tenetur illo molestias enim aut iste. Provident quo hic aut. Aut quidem voluptates dolores. Dolorem quae ab alias tempora.",
+                          "unit_price": 670.76,
+                          "merchant_id": 1
+                      }
+                  }
+              ]
+          }
+        </code></pre>
+      </section>
+      <br>
+      <section id="get-merchants-revenue" style="background-color:lightgrey;">
+        <p><b>GET /merchants/1/revenue</b></p>
+        <p>This endpoint returns the total revenue a merchant has made.</p>
+        <p style="color:blue;">Response</p>
+        <pre><code>
+          {
+              "data": {
+                  "id": null,
+                  "type": "revenue",
+                  "attributes": {
+                      "revenue": 57493574.869999774
+                  }
+              }
+          }
+        </code></pre>
+      </section>
+      <br>
+      <section id="get-revenue" style="background-color:lightgrey;">
+        <p><b>GET /revenue?start=2012-03-09&end=2012-03-24</b></p>
+        <p>Revenue takes in two parameters: START (which is the start date you want to inquire about all site revenue) and END (which is the end date).</p>
+        <p style="color:blue;">Response</p>
+        <pre><code>
+          {
+              "data": {
+                  "id": null,
+                  "type": "revenue",
+                  "attributes": {
+                      "revenue": 43201227.80000027
+                  }
+              }
+          }
+        </code></pre>
+      </section>
+      <br>
+      <section id="get-merchants-find" style="background-color:lightgrey;">
+        <p><b>GET /api/v1/merchants/find?name=ring</b></p>
+        <p>The URI should follow this pattern: <code><b>GET /api/v1/merchant/find?attribute=value</b></code></p>
+        <p>
+          <ul>
+            <p>The following attribute are available:</p>
+            <ul>
+              <li>name</li>
+              <li>id</li>
+              <li>created_at</li>
+              <li>updated_at</li>
+            </ul>
+          </ul>
+        </p>
+        <p style="color:blue;">Response</p>
+        <pre><code>
+          {
+            "data": {
+              "id": 4,
+              "type": "merchant",
+              "attributes": {
+                "name": "Ring World"
+              }
+            }
+          }
+        </code></pre>
+      </section>
+      <br>
+      <section id="get-merchants-find-all" style="background-color:lightgrey;">
+        <p><b>GET /api/v1/merchants/find_all?name=ring</b></p>
+        <p>The URI should follow this pattern: <code><b>GET /api/v1/merchant/find_all?attribute=value</b></code></p>
+        <p>
+          <ul>
+            <p>The following attribute are available:</p>
+            <ul>
+              <li>name</li>
+              <li>id</li>
+              <li>created_at</li>
+              <li>updated_at</li>
+            </ul>
+          </ul>
+        </p>
+        <p style="color:blue;">Response</p>
+        <pre><code>
+          {
+            "data": [
+              {
+                "id": "4",
+                "type": "merchant",
+                "attributes": {
+                  "name": "Ring World"
+                }
+              },
+              {
+                "id": "1",
+                "type": "merchant",
+                "attributes": {
+                  "name": "Turing School"
+                }
+              }
+            ]
+          }
+        </code></pre>
+      </section>
+      <br>
+      <section id="get-merchants-most-revenue" style="background-color:lightgrey;">
+        <p><b>GET /api/v1/merchants/most_revenue?quantity=2</b></p>
+        <p>This endpoints gets the x number of merchants producing the most revenue.</p>
+        <p>The URI should follow this pattern: <code><b>GET /api/v1/merchants/most_revenue?quantity=x</b></code> where x is the desired number of results returned.</p>
+        <p style="color:blue;">Response</p>
+        <pre><code>
+          {
+            "data": [
+              {
+                "id": "1",
+                "type": "merchant",
+                "attributes": {
+                  "name": "Turing School"
+                }
+              },
+              {
+                "id": "4",
+                "type": "merchant",
+                "attributes": {
+                  "name": "Ring World"
+                }
+              }
+            ]
+          }
+        </code></pre>
+      </section>
+      <br>
+      <section id="get-merchants-most-items" style="background-color:lightgrey;">
+        <p><b>GET /api/v1/merchants/most_items?quantity=2</b></p>
+        <p>This endpoints gets the x number of merchants who have sold the most items.</p>
+        <p>The URI should follow this pattern: <code><b>GET /api/v1/merchants/most_items?quantity=x</b></code> where x is the desired number of results returned.</p>
+        <p style="color:blue;">Response</p>
+        <pre><code>
+          {
+            "data": [
+              {
+                "id": "1",
+                "type": "merchant",
+                "attributes": {
+                  "name": "Turing School"
+                }
+              },
+              {
+                "id": "4",
+                "type": "merchant",
+                "attributes": {
+                  "name": "Ring World"
+                }
+              }
+            ]
+          }
+        </code></pre>
+      </section>
+      <br>
+      <section id="get-items-find" style="background-color:lightgrey;">
+        <p><b>GET /api/v1/items/find?name=Item%Qui%Esse</b></p>
+        <p>The URI should follow this pattern: <code><b>GET /api/v1/items/find?attribute=value</b></code></p>
+        <p>
+          <ul>
+            <p>The following attribute are available:</p>
+            <ul>
+              <li>name</li>
+              <li>description</li>
+              <li>unit_price</li>
+              <li>merchant_id</li>
+            </ul>
+          </ul>
+        </p>
+        <p style="color:blue;">Response</p>
+        <pre><code>
+          {
+              "data": {
+                  "id": "1",
+                  "type": "item",
+                  "attributes": {
+                      "name": "Item Qui Esse",
+                      "description": "Nihil autem sit odio inventore deleniti. Est laudantium ratione distinctio laborum. Minus voluptatem nesciunt assumenda dicta voluptatum porro.",
+                      "unit_price": 751.07,
+                      "merchant_id": 1
+                  }
+              }
+          }
+        </code></pre>
+      </section>
+      <br>
+      <section id="get-items-find-all" style="background-color:lightgrey;">
+        <p><b>GET /api/v1/items/find_all?name=Item%Qui%Esse</b></p>
+        <p>The URI should follow this pattern: <code><b>GET /api/v1/items/find_all?attribute=value</b></code></p>
+        <p>
+          <ul>
+            <p>The following attribute are available:</p>
+            <ul>
+              <li>name</li>
+              <li>description</li>
+              <li>unit_price</li>
+              <li>merchant_id</li>
+            </ul>
+          </ul>
+        </p>
+        <p style="color:blue;">Response</p>
+        <pre><code>
+          {
+              "data": {
+                  "id": "1",
+                  "type": "item",
+                  "attributes": {
+                      "name": "Item Qui Esse",
+                      "description": "Nihil autem sit odio inventore deleniti. Est laudantium ratione distinctio laborum. Minus voluptatem nesciunt assumenda dicta voluptatum porro.",
+                      "unit_price": 751.07,
+                      "merchant_id": 1
+                  }
+              }
+          }
+        </code></pre>
+      </section>
+      <br>
+      <section id="get-items-merchant" style="background-color:lightgrey;">
+        <p><b>GET /items/1/merchant</b></p>
+        <p style="color:blue;">Response</p>
+        <pre><code>
+          {
+              "data": {
+                  "id": "1",
+                  "type": "merchant",
+                  "attributes": {
+                      "name": "Schroeder-Jerde"
+                  }
+              }
+          }
+        </code></pre>
+      </section>
+      <br>
+    </section>
+  </body>
+</html>
