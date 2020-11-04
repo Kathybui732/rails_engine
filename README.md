@@ -13,6 +13,7 @@ Rails engine is a backend E-commerce application providing full CRUD functionali
 
  ### Ruby Version
  Ruby 2.5.3
+ 
  Rails 5.2.4.3
 
  ### Configuration
@@ -23,44 +24,101 @@ Rails engine is a backend E-commerce application providing full CRUD functionali
 5. `bundle exec rake import` to seed your database
 6. `bundle exec rspec` to run the test suite
 
-### CRUD ENDPOINTS FOLLOWING REST PRICIPLES
-Create
+### Here is one set of full CRUD functionality endpoints. To see all endpoints available, please checkout my docs here!
+- The base URL for this application is ``
+
+### GET /merchants
+For a list of all merchants recorded in the database
+
+**response**
+```json
+{
+    "data": [
+        {
+            "id": "1",
+            "type": "merchant",
+            "attributes": {
+                "name": "Schroeder-Jerde"
+            }
+        },
+        {
+            "id": "2",
+            "type": "merchant",
+            "attributes": {
+                "name": "Klein, Rempel and Jones"
+            }
+        }
+    ]
+}
+```
+
+### GET /merchants/1
+For information about a specific merchant
+
+```json
+{
+    "data": {
+        "id": "1",
+        "type": "merchant",
+        "attributes": {
+            "name": "Schroeder-Jerde"
+        }
+    }
+}
+```
+
+### POST /merchants
+To create a new merchant
+
+**Body**
+```json
+{
+  "name": "New Merchant"
+}
+```
+
+**Response**
+```json
+{
+    "data": {
+        "id": "101",
+        "type": "merchant",
+        "attributes": {
+            "name": "New Merchant"
+        }
+    }
+}
+```
+
+### Patch /merchants/101
+To update information about a merchant
+
+```json
+{
+  "name": "New Name"
+}
+```
+
+**Response**
+```json
+{
+    "data": {
+        "id": "101",
+        "type": "merchant",
+        "attributes": {
+            "name": "New Name"
+        }
+    }
+}
+```
+
+### Delete /merchants/101
+To delete a merchant record
+
+This endpoint returns a 204, No Content.
 
 
-Read
-
-
-Update
-
-
-Destroy
-
-
-### Additional Endpoints
-Find
-
-
-Find_all
-
-
-Single finder - Merchant
-
-
-Multi finder - Merchant
-
-
-Most Revenue
-
-
-Most Items
-
-
-Merchant Revenue
-
-
-Total Revenue over a time period
-
-### Sad paths/Edge cases considered, not executed
+### Sad paths/Edge cases considered, not exucuted
 - Response needs:
 - to be accounted for when users enter something other than a number for an id when making a get request
 - Users entering in multiple params
